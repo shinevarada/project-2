@@ -1,0 +1,40 @@
+CREATE  TABLE  Tag
+(	Tag_id    int   NOT NULL,
+	Tag_name   varchar( 255)    NOT NULL,
+ 	PRIMARY  KEY(Tag_id)
+);
+
+CREATE  TABLE  Tagged
+(	User_id   int  NOT NULL,
+	Picture_id    int  NOT NULL,
+	Tag_id   int   NOT NULL,
+	PRIMARY KEY (User_id, Picture_id),
+	FOREIGN KEY (Tag_id )   REFERENCES  Tag(Tag_id)
+);
+   
+
+CREATE  TABLE  Picture
+(	Picture_id     int   NOT NULL,
+        Caption   varchar(30)    DEFAULT ‘NO CAPTION’,
+  	Picture_path     varchar(30)    NOT NULL,
+	Day   varchar(10)       NOT NULL,
+        Date_of_posting  date,
+	Tag_id   int ,
+	PRIMARY KEY (Picture_id),
+	FOREIGN KEY (Tag_id)  REFERENCES   Tag(Tag_id)
+);
+
+CREATE  TABLE   Liked_it
+(	User_id    int NOT NULL,
+	Picture_id    int   NOT NULL,
+	PRIMARY  KEY   (User_id,Picture_id), FOREIGN KEY(picture_id)   REFERENCES   Picture(Picture_id)
+); 
+CREATE  TABLE  User
+(	 User_id   int  NOT NULL,
+	User_name   varchar(25)  NOT NULL,
+	Email_address   varchar(25)    NOT NULL,
+	Picture_id int,
+	PRIMARY KEY (user_id),
+	FOREIGN KEY (Picture_id)  REFERENCES  Picture (Picture_id)
+);
+
